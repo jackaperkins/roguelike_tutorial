@@ -30,8 +30,12 @@ def main():
     key = libtcod.Key()
     mouse = libtcod.Mouse()
 
+    room_max_size = 10
+    room_min_size = 6
+    max_rooms = 30
+
     game_map = GameMap(map_width, map_height)
-    game_map.make_map()
+    game_map.make_map(max_rooms, room_min_size, room_max_size, map_width, map_height, player)
 
     while not libtcod.console_is_window_closed():
         libtcod.sys_check_for_event(libtcod.EVENT_KEY_PRESS, key, mouse)
@@ -51,6 +55,10 @@ def main():
 
         if exit:
             return True
+
+        if action.get('regenerate'):
+            game_map = GameMap(map_width, map_height)
+            game_map.make_map(max_rooms, room_min_size, room_max_size, map_width, map_height, player)
 
         if fullscreen:
             libtcod.console_set_fullscreen(not libtcod.console_is_fullscreen())

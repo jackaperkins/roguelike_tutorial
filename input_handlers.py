@@ -15,6 +15,9 @@ def handle_keys(key):
         # Alt+Enter: toggle full screen
         return {'fullscreen': True}
 
+    if key.vk == libtcod.KEY_SPACE:
+        return {'regenerate': True}
+
     elif key.vk == libtcod.KEY_ESCAPE:
         # Exit the game
         return {'exit': True}
