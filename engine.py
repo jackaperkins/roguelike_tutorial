@@ -1,4 +1,4 @@
-import libtcodpy as libtcod
+import tcod as libtcod
 
 from input_handlers import handle_keys
 from entity import Entity
@@ -11,10 +11,9 @@ def main():
     map_width = 80
     map_height = 45
 
-    colors = {
-        'dark_wall': libtcod.Color(80, 80, 100),
-        'dark_ground': libtcod.Color(50, 50, 150)
-    }
+    fov_algorithm = 0
+    fov_light_walls = True
+    fov_radius = 10
 
     player = Entity(int(screen_width / 2), int(screen_height / 2), '@', libtcod.white)
     npc = Entity(int(screen_width / 2 - 5), int(screen_height / 2), '@', libtcod.yellow)
@@ -63,7 +62,7 @@ def main():
         if fullscreen:
             libtcod.console_set_fullscreen(not libtcod.console_is_fullscreen())
 
-        render_all(con, entities, game_map, screen_width, screen_height, colors)
+        render_all(con, entities, game_map, screen_width, screen_height)
 
         libtcod.console_flush()
 
